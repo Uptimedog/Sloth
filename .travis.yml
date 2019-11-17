@@ -6,9 +6,6 @@ addons:
     packages:
     - rpm
 
-services:
-  - redis-server
-
 go:
   - 1.9.x
   - 1.10.x
@@ -47,3 +44,12 @@ matrix:
   - go: 1.9.x
   - go: 1.10.x
   - go: master
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: curl -sL http://git.io/goreleaser | bash
+  on:
+    tags: true
+    go: 1.12.x
+    condition: $TRAVIS_OS_NAME = linux
