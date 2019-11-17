@@ -14,8 +14,7 @@ import (
 )
 
 // HTTPClient struct
-type HTTPClient struct {
-}
+type HTTPClient struct{}
 
 // NewHTTPClient creates an instance of http client
 func NewHTTPClient() *HTTPClient {
