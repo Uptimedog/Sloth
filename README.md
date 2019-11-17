@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/logo.png" height="100" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/logo.png" width="130" />
     <h3 align="center">Sloth</h3>
     <p align="center">A System Metrics Collector.</p>
     <p align="center">
