@@ -11,5 +11,5 @@ import (
 
 // TestSlothRelease test cases
 func TestSlothRelease(t *testing.T) {
-	st.Expect(t, SlothRelease(), "Sloth - 0.0.1")
+	st.Expect(t, SlothRelease(), "sloth version 0.0.1")
 }

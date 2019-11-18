@@ -10,7 +10,7 @@ import (
 
 // SlothRelease the current release
 func SlothRelease() string {
-	return "Sloth - 0.0.1"
+	return "sloth version 0.0.1"
 }
 
 func main() {
