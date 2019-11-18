@@ -4,7 +4,21 @@
 
 package main
 
-// PkgName returns the package name
-func PkgName() string {
-	return "Sloth"
+import (
+	"github.com/gin-gonic/gin"
+)
+
+// SlothRelease the current release
+func SlothRelease() string {
+	return "Sloth - 0.0.1"
+}
+
+func main() {
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run()
 }

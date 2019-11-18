@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-// TestPkgName test cases
-func TestPkgName(t *testing.T) {
-	st.Expect(t, PkgName(), "Sloth")
+// TestSlothRelease test cases
+func TestSlothRelease(t *testing.T) {
+	st.Expect(t, SlothRelease(), "Sloth - 0.0.1")
 }
