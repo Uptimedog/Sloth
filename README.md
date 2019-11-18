@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/logo.png" width="130" />
     <h3 align="center">Sloth</h3>
-    <p align="center">Highly Available Monitoring & Alerting System for Your Infrastructure.</p>
+    <p align="center">Monitoring & Alerting System for Your Infrastructure.</p>
     <p align="center">
         <a href="https://godoc.org/github.com/clivern/sloth"><img src="https://godoc.org/github.com/clivern/sloth?status.svg"></a>
         <a href="https://travis-ci.org/Clivern/Sloth"><img src="https://travis-ci.org/Clivern/Sloth.svg?branch=master"></a>
