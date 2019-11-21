@@ -12,11 +12,11 @@
 </p>
 
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/feature/architecture/assets/img/sloth.png" height="450" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/diagram.png" height="450" />
 </p>
 
 
-Sloth is a highly available liteweight monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting. 
+Sloth is a highly available liteweight monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting.
 
 Sloth uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
 
