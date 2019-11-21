@@ -1,7 +1,7 @@
 <p align="center">
     <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/logo.png" width="130" />
     <h3 align="center">Sloth</h3>
-    <p align="center">Highly Available Liteweight Monitoring & Alerting System.</p>
+    <p align="center">Liteweight HA Monitoring & Alerting System.</p>
     <p align="center">
         <a href="https://godoc.org/github.com/clivern/sloth"><img src="https://godoc.org/github.com/clivern/sloth?status.svg"></a>
         <a href="https://travis-ci.org/Clivern/Sloth"><img src="https://travis-ci.org/Clivern/Sloth.svg?branch=master"></a>
@@ -16,7 +16,7 @@
 </p>
 
 
-Sloth is a highly available liteweight monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting.
+Sloth is a liteweight highly available monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting.
 
 Sloth uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
 
