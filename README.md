@@ -16,7 +16,9 @@
 </p>
 
 
-Sloth is a highly available liteweight monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting. Sloth uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
+Sloth is a highly available liteweight monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting. 
+
+Sloth uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
 
 
 ## Documentation
