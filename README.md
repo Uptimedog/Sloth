@@ -16,9 +16,12 @@
 </p>
 
 
-Sloth is a liteweight highly available monitoring and alerting system. It comes with three roles, agent role that runs health checks on hosts, orchestrator role that watch the agents and split the work across workers and worker role that is responsible for updating agents state, health checks and alerting.
+**Sloth** is a liteweight highly available monitoring and alerting system. It comes with three roles:
+ * `Agent Role`: Runs health checks on hosts
+ * `Orchestrator Role`: Watches the agents and distribute the load over workers.
+ * `Worker Role`: Updates agents state, health checks and alerting.
 
-Sloth uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
+**Sloth** uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the orchestrator). It is still an experimental project so use at your own risk.
 
 
 ## Documentation
