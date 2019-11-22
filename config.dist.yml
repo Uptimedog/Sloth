@@ -1,0 +1,25 @@
+# Node roles
+roles:
+    - agent
+    - orchestrator
+    - worker
+
+
+# Common configs
+common:
+    key: value
+
+
+# only if roles has agent
+agent:
+    key: value
+
+
+# only if roles has orchestrator
+orchestrator:
+    key: value
+
+
+# only if roles has worker
+worker:
+    key: value
