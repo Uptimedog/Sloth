@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/diagram.png" width="95%" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/Clivern/Sloth/master/assets/img/diagram.png" width="65%" />
 </p>
 
 
