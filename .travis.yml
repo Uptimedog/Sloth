@@ -26,9 +26,8 @@ script:
   - export PATH="$PATH:$GOBIN"
   # Fix dir names
   - cd $GOPATH/src/github.com/
-  - mv Clivern/Sloth Clivern/sloth
-  - mv Clivern clivern
-  - cd clivern/sloth
+  - mv silverbackhq/Sloth silverbackhq/sloth
+  - cd silverbackhq/sloth
   # Config & execute ci tasks
   - make install_revive
   - make ci

@@ -1,4 +1,4 @@
-module github.com/clivern/sloth
+module github.com/silverbackhq/sloth
 
 go 1.13
 

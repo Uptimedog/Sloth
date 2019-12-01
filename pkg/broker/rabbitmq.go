@@ -1,4 +1,4 @@
-// Copyright 2019 Clivern. All rights reserved.
+// Copyright 2019 Silverbackhq. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
@@ -9,21 +9,24 @@ import (
 	"github.com/streadway/amqp"
 )
 
-// rabbitmq struct
-type rabbitmq struct {
+// Rabbitmq struct
+type Rabbitmq struct {
 	Conn *amqp.Connection
 	Addr string
 }
 
 // NewRabbitmq create a new instance
-func NewRabbitmq(addr string) *rabbitmq {
-	return &rabbitmq{
-		Addr: addr,
-	}
+func NewRabbitmq() *Rabbitmq {
+	return &Rabbitmq{}
 }
 
-// Connect connects to rabbitmq
-func (c *rabbitmq) Connect() (bool, error) {
+// SetAddr sets rabbitmq address
+func (c *Rabbitmq) SetAddr(addr string) {
+	c.Addr = addr
+}
+
+// Connect connects to Rabbitmq
+func (c *Rabbitmq) Connect() (bool, error) {
 	var err error
 
 	c.Conn, err = amqp.Dial(c.Addr)
@@ -41,6 +44,6 @@ func (c *rabbitmq) Connect() (bool, error) {
 }
 
 // Disconnect closes the connection
-func (c *rabbitmq) Disconnect() {
+func (c *Rabbitmq) Disconnect() {
 	c.Conn.Close()
 }
