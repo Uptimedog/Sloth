@@ -2,9 +2,12 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
-package main
+package etcd
 
-// PkgName returns the package name
-func PkgName() string {
-	return "Sloth"
+// Etcd struct
+type Etcd struct{}
+
+// NewEtcd create a new instance
+func NewEtcd() *Etcd {
+	return &Etcd{}
 }
