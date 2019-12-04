@@ -43,6 +43,56 @@ func (c *Rabbitmq) Connect() (bool, error) {
 	return true, nil
 }
 
+// Publish publish the message to rabbitmq
+func (c *Rabbitmq) Publish(queue string, message string) (bool, error) {
+	ch, err := c.Conn.Channel()
+
+	if err != nil {
+		return false, fmt.Errorf(
+			"Failed to open a channel: %s",
+			err.Error(),
+		)
+	}
+
+	defer ch.Close()
+
+	q, err := ch.QueueDeclare(
+		queue, // name
+		false, // durable
+		false, // delete when unused
+		false, // exclusive
+		false, // no-wait
+		nil,   // arguments
+	)
+
+	if err != nil {
+		return false, fmt.Errorf(
+			"Failed to declare a queue: %s",
+			err.Error(),
+		)
+	}
+
+	err = ch.Publish(
+		"",     // exchange
+		q.Name, // routing key
+		false,  // mandatory
+		false,  // immediate
+		amqp.Publishing{
+			ContentType: "text/plain",
+			Body:        []byte(message),
+		},
+	)
+
+	if err != nil {
+		return false, fmt.Errorf(
+			"Failed to publish a message: %s",
+			err.Error(),
+		)
+	}
+
+	return true, nil
+}
+
 // Disconnect closes the connection
 func (c *Rabbitmq) Disconnect() {
 	c.Conn.Close()
