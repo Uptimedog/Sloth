@@ -91,6 +91,11 @@ func (r *Rabbitmq) Publish(queue string, message string) (bool, error) {
 	return true, nil
 }
 
+// Listen listens to published messages
+func (r *Rabbitmq) Listen(_ func(message string) error) {
+
+}
+
 // Disconnect closes the connection
 func (r *Rabbitmq) Disconnect() {
 	r.Conn.Close()
