@@ -38,8 +38,6 @@ func (r *Rabbitmq) Connect() (bool, error) {
 		)
 	}
 
-	defer r.Conn.Close()
-
 	return true, nil
 }
 
