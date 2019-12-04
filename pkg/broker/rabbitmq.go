@@ -21,15 +21,15 @@ func NewRabbitmq() *Rabbitmq {
 }
 
 // SetAddr sets rabbitmq address
-func (c *Rabbitmq) SetAddr(addr string) {
-	c.Addr = addr
+func (r *Rabbitmq) SetAddr(addr string) {
+	r.Addr = addr
 }
 
 // Connect connects to Rabbitmq
-func (c *Rabbitmq) Connect() (bool, error) {
+func (r *Rabbitmq) Connect() (bool, error) {
 	var err error
 
-	c.Conn, err = amqp.Dial(c.Addr)
+	r.Conn, err = amqp.Dial(r.Addr)
 
 	if err != nil {
 		return false, fmt.Errorf(
@@ -38,14 +38,14 @@ func (c *Rabbitmq) Connect() (bool, error) {
 		)
 	}
 
-	defer c.Conn.Close()
+	defer r.Conn.Close()
 
 	return true, nil
 }
 
 // Publish publish the message to rabbitmq
-func (c *Rabbitmq) Publish(queue string, message string) (bool, error) {
-	ch, err := c.Conn.Channel()
+func (r *Rabbitmq) Publish(queue string, message string) (bool, error) {
+	ch, err := r.Conn.Channel()
 
 	if err != nil {
 		return false, fmt.Errorf(
@@ -94,6 +94,6 @@ func (c *Rabbitmq) Publish(queue string, message string) (bool, error) {
 }
 
 // Disconnect closes the connection
-func (c *Rabbitmq) Disconnect() {
-	c.Conn.Close()
+func (r *Rabbitmq) Disconnect() {
+	r.Conn.Close()
 }
