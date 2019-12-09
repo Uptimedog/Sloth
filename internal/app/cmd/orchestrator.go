@@ -4,5 +4,22 @@
 
 package cmd
 
+import (
+	"github.com/silverbackhq/sloth/internal/app/orchestrator"
+)
+
 // Orchestrator struct
-type Orchestrator struct{}
+type Orchestrator struct {
+	Config *orchestrator.Config
+}
+
+// NewOrchestrator create a new instance
+func NewOrchestrator(config *orchestrator.Config) *Orchestrator {
+	return &Orchestrator{
+		Config: config,
+	}
+}
+
+// Run runs the orchestrator
+func (o *Orchestrator) Run() {
+}

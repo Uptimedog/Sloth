@@ -6,3 +6,8 @@ package agent
 
 // Config struct
 type Config struct{}
+
+// NewConfig create a new instance
+func NewConfig() *Config {
+	return &Config{}
+}

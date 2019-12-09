@@ -4,5 +4,22 @@
 
 package cmd
 
+import (
+	"github.com/silverbackhq/sloth/internal/app/agent"
+)
+
 // Agent struct
-type Agent struct{}
+type Agent struct {
+	Config *agent.Config
+}
+
+// NewAgent create a new instance
+func NewAgent(config *agent.Config) *Agent {
+	return &Agent{
+		Config: config,
+	}
+}
+
+// Run runs the agent
+func (a *Agent) Run() {
+}
