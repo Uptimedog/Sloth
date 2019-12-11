@@ -5,6 +5,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/silverbackhq/sloth/internal/app/agent"
 )
 
@@ -22,4 +24,5 @@ func NewAgent(config *agent.Config) *Agent {
 
 // Run runs the agent
 func (a *Agent) Run() {
+	fmt.Println("Agent started .....")
 }

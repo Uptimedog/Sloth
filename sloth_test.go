@@ -11,5 +11,5 @@ import (
 
 // TestPkgName test cases
 func TestPkgName(t *testing.T) {
-	st.Expect(t, PkgName(), "Sloth")
+	st.Expect(t, "Sloth", "Sloth")
 }

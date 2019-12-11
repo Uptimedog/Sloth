@@ -5,6 +5,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/silverbackhq/sloth/internal/app/orchestrator"
 )
 
@@ -22,4 +24,5 @@ func NewOrchestrator(config *orchestrator.Config) *Orchestrator {
 
 // Run runs the orchestrator
 func (o *Orchestrator) Run() {
+	fmt.Println("Orchestrator started .....")
 }

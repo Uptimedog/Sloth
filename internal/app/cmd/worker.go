@@ -5,6 +5,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/silverbackhq/sloth/internal/app/worker"
 )
 
@@ -22,4 +24,5 @@ func NewWorker(config *worker.Config) *Worker {
 
 // Run runs the worker
 func (w *Worker) Run() {
+	fmt.Println("Worker started .....")
 }

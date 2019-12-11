@@ -12,8 +12,6 @@ import (
 	"github.com/silverbackhq/sloth/internal/app/worker"
 )
 
-// Injectors from wire.go:
-
 func InitializeNewAgent() *cmd.Agent {
 	config := agent.NewConfig()
 	cmdAgent := cmd.NewAgent(config)
