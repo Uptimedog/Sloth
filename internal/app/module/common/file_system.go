@@ -8,11 +8,11 @@ import (
 	"os"
 )
 
-// FS struct
-type FS struct{}
+// FileSystem struct
+type FileSystem struct{}
 
 // PathExists reports whether the path exists
-func (fs *FS) PathExists(path string) bool {
+func (fs *FileSystem) PathExists(path string) bool {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		return false
 	}
@@ -20,7 +20,7 @@ func (fs *FS) PathExists(path string) bool {
 }
 
 // FileExists reports whether the named file exists
-func (fs *FS) FileExists(path string) bool {
+func (fs *FileSystem) FileExists(path string) bool {
 	if fi, err := os.Stat(path); err == nil {
 		if fi.Mode().IsRegular() {
 			return true
@@ -30,7 +30,7 @@ func (fs *FS) FileExists(path string) bool {
 }
 
 // DirExists reports whether the dir exists
-func (fs *FS) DirExists(path string) bool {
+func (fs *FileSystem) DirExists(path string) bool {
 	if fi, err := os.Stat(path); err == nil {
 		if fi.Mode().IsDir() {
 			return true
@@ -40,7 +40,7 @@ func (fs *FS) DirExists(path string) bool {
 }
 
 // EnsureDir ensures that directory exists
-func (fs *FS) EnsureDir(dirName string, mode int) (bool, error) {
+func (fs *FileSystem) EnsureDir(dirName string, mode int) (bool, error) {
 	err := os.MkdirAll(dirName, os.FileMode(mode))
 
 	if err == nil || os.IsExist(err) {
