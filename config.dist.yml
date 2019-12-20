@@ -1,5 +1,5 @@
-# Node roles
-roles: ${SLOTH_ROLES:-agent,orchestrator,worker}
+# Node role agent or orchestrator or worker
+role: ${SLOTH_ROLES:-agent}
 
 
 # Log configs
@@ -14,7 +14,28 @@ log:
 
 # only if roles has agent
 agent:
-    key: value
+    hostname: ${SLOTH_AGENT_HOSTNAME:-localhost}
+    validation_key: ${SLOTH_AGENT_VALIDATION_KEY:-/etc/sloth/validation.pem}
+    client_key: ${SLOTH_AGENT_CLIENT_KEY:-/etc/sloth/client.pem}
+    checks:
+        -
+            type: http
+            configs:
+                -
+                    name: url
+                    value: http://localhost
+                -
+                    name: method
+                    value: get
+                -
+                    name: timeout
+                    value: 5s
+                -
+                    name: method
+                    value: get
+                -
+                    name: headers
+                    value: x-key=value_here
 
 
 # only if roles has orchestrator

@@ -8,6 +8,8 @@ import (
 	"fmt"
 
 	"github.com/silverbackhq/sloth/internal/app/agent"
+
+	"github.com/spf13/viper"
 )
 
 // Agent struct
@@ -23,6 +25,29 @@ func NewAgent(config *agent.Config) *Agent {
 }
 
 // Run runs the agent
-func (a *Agent) Run() {
+func (a *Agent) Run() error {
 	fmt.Println("Agent started .....")
+
+	return nil
+}
+
+// Register registers the agent
+func (a *Agent) Register() error {
+
+	err := viper.Unmarshal(a.Config)
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(a.Config)
+	fmt.Println(a.Config.Log)
+	fmt.Println(a.Config.Agent)
+
+	fmt.Println(a.Config.Agent.Checks)
+	fmt.Println(a.Config.Agent.Checks)
+
+	fmt.Println("Register agent .....")
+
+	return nil
 }

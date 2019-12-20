@@ -13,8 +13,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/silverbackhq/sloth/internal/app/module/common"
+
 	"github.com/drone/envsubst"
-	"github.com/silverbackhq/sloth/internal/app/module"
 	"github.com/spf13/viper"
 )
 
@@ -65,7 +66,7 @@ func main() {
 	}
 
 	if viper.GetString("log.output") != "stdout" {
-		fs := module.FS{}
+		fs := module.FileSystem{}
 		dir, _ := filepath.Split(viper.GetString("log.output"))
 
 		if !fs.DirExists(dir) {
@@ -91,24 +92,20 @@ func main() {
 		}
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(AgentRole),
-	) {
-		InitializeNewAgent().Run()
+	if strings.ToLower(viper.GetString("role")) == strings.ToLower(AgentRole) {
+		agent := InitializeNewAgent()
+		err := agent.Register()
+		if err != nil {
+			panic(fmt.Sprintf("Error! Unable to register agent: %s", err.Error()))
+		}
+		agent.Run()
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(WorkerRole),
-	) {
+	if strings.ToLower(viper.GetString("role")) == strings.ToLower(WorkerRole) {
 		InitializeNewWorker().Run()
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(OrchestratorRole),
-	) {
+	if strings.ToLower(viper.GetString("role")) == strings.ToLower(OrchestratorRole) {
 		InitializeNewOrchestrator().Run()
 	}
 }
