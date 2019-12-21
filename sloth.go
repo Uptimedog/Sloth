@@ -13,8 +13,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/silverbackhq/sloth/internal/app/module/common"
+
 	"github.com/drone/envsubst"
-	"github.com/silverbackhq/sloth/internal/app/module"
 	"github.com/spf13/viper"
 )
 
@@ -65,7 +66,7 @@ func main() {
 	}
 
 	if viper.GetString("log.output") != "stdout" {
-		fs := module.FS{}
+		fs := module.FileSystem{}
 		dir, _ := filepath.Split(viper.GetString("log.output"))
 
 		if !fs.DirExists(dir) {
