@@ -24,8 +24,6 @@ const (
 	AgentRole = "agent"
 	// WorkerRole var
 	WorkerRole = "worker"
-	// OrchestratorRole var
-	OrchestratorRole = "orchestrator"
 )
 
 func main() {
@@ -103,9 +101,5 @@ func main() {
 
 	if strings.ToLower(viper.GetString("role")) == strings.ToLower(WorkerRole) {
 		InitializeNewWorker().Run()
-	}
-
-	if strings.ToLower(viper.GetString("role")) == strings.ToLower(OrchestratorRole) {
-		InitializeNewOrchestrator().Run()
 	}
 }

@@ -8,7 +8,6 @@ package main
 import (
 	"github.com/silverbackhq/sloth/internal/app/agent"
 	"github.com/silverbackhq/sloth/internal/app/cmd"
-	"github.com/silverbackhq/sloth/internal/app/orchestrator"
 	"github.com/silverbackhq/sloth/internal/app/worker"
 )
 
@@ -16,12 +15,6 @@ func InitializeNewAgent() *cmd.Agent {
 	config := agent.NewConfig()
 	cmdAgent := cmd.NewAgent(config)
 	return cmdAgent
-}
-
-func InitializeNewOrchestrator() *cmd.Orchestrator {
-	config := orchestrator.NewConfig()
-	cmdOrchestrator := cmd.NewOrchestrator(config)
-	return cmdOrchestrator
 }
 
 func InitializeNewWorker() *cmd.Worker {
