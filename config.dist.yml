@@ -1,4 +1,4 @@
-# Node role agent or orchestrator or worker
+# Node role agent or worker or api
 role: ${SLOTH_ROLES:-agent}
 
 
@@ -39,4 +39,8 @@ agent:
 
 # only if roles has worker
 worker:
+    key: value
+
+# only if roles has api
+api:
     key: value

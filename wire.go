@@ -9,6 +9,7 @@ package main
 import (
 	"github.com/google/wire"
 	"github.com/silverbackhq/sloth/internal/app/agent"
+	"github.com/silverbackhq/sloth/internal/app/api"
 	"github.com/silverbackhq/sloth/internal/app/cmd"
 	"github.com/silverbackhq/sloth/internal/app/worker"
 )
@@ -21,4 +22,9 @@ func InitializeNewAgent() *cmd.Agent {
 func InitializeNewWorker() *cmd.Worker {
 	wire.Build(cmd.NewWorker, worker.NewConfig)
 	return &cmd.Worker{}
+}
+
+func InitializeNewAPI() *cmd.Agent {
+	wire.Build(cmd.NewAPI, api.NewConfig)
+	return &cmd.Agent{}
 }

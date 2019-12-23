@@ -24,6 +24,8 @@ const (
 	AgentRole = "agent"
 	// WorkerRole var
 	WorkerRole = "worker"
+	// APIRole var
+	APIRole = "api"
 )
 
 func main() {
@@ -101,5 +103,9 @@ func main() {
 
 	if strings.ToLower(viper.GetString("role")) == strings.ToLower(WorkerRole) {
 		InitializeNewWorker().Run()
+	}
+
+	if strings.ToLower(viper.GetString("role")) == strings.ToLower(APIRole) {
+		InitializeNewAPI().Run()
 	}
 }

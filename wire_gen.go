@@ -7,6 +7,7 @@ package main
 
 import (
 	"github.com/silverbackhq/sloth/internal/app/agent"
+	"github.com/silverbackhq/sloth/internal/app/api"
 	"github.com/silverbackhq/sloth/internal/app/cmd"
 	"github.com/silverbackhq/sloth/internal/app/worker"
 )
@@ -21,4 +22,10 @@ func InitializeNewWorker() *cmd.Worker {
 	config := worker.NewConfig()
 	cmdWorker := cmd.NewWorker(config)
 	return cmdWorker
+}
+
+func InitializeNewAPI() *cmd.API {
+	config := api.NewConfig()
+	cmdAPI := cmd.NewAPI(config)
+	return cmdAPI
 }

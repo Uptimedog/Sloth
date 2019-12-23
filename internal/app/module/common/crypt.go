@@ -12,7 +12,9 @@ import (
 	"io"
 )
 
-const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-"
+const (
+	letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-"
+)
 
 // Encrypt encrypt text with a key
 func Encrypt(plaintext []byte, key []byte) ([]byte, error) {
