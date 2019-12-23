@@ -9,8 +9,8 @@ import (
 	"testing"
 )
 
-// TestHttpGet test cases
-func TestHttpGet(t *testing.T) {
+// TestCrypt test cases
+func TestCrypt(t *testing.T) {
 	encryptionKey, _ := GenerateRandomString(32)
 	text := []byte(`{"Id":1,"hostname":"localhost","message":"Hello World","type":"agent"}`)
 	ciphertext, err := Encrypt(text, []byte(encryptionKey))
