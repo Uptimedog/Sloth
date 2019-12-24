@@ -12,13 +12,14 @@
 </p>
 
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/silverbackhq/Sloth/master/assets/img/diagram.png" width="65%" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/silverbackhq/Sloth/master/assets/img/diagram.png?v=0.1.0" width="65%" />
 </p>
 
 
 **Sloth** is a liteweight highly available monitoring and alerting system. It comes with three roles:
  * `Agent Role`: Runs health checks on hosts.
  * `Worker Role`: Updates agents state, health checks and alerting. The elected leader watches if agents up or down.
+ * `API Role`: A REST service to interact with the cluster & collect metrics.
 
 **Sloth** uses RabbitMQ as default message broker and etcd as a data storage and for leader election (electing the leader worker). It is still an experimental project so use at your own risk.
 
