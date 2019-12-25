@@ -30,8 +30,10 @@ const (
 
 func main() {
 	var configFile string
+	var role string
 
 	flag.StringVar(&configFile, "config", "config.prod.yml", "config")
+	flag.StringVar(&role, "role", "", "role")
 	flag.Parse()
 
 	configUnparsed, err := ioutil.ReadFile(configFile)
@@ -92,7 +94,18 @@ func main() {
 		}
 	}
 
-	if strings.ToLower(viper.GetString("role")) == strings.ToLower(AgentRole) {
+	if role == "" {
+		role = strings.ToLower(viper.GetString("role"))
+	}
+
+	if !module.InArray(role, []string{AgentRole, WorkerRole, APIRole}) {
+		panic(fmt.Sprintf(
+			"Error! Invalid role [%s]",
+			role,
+		))
+	}
+
+	if role == strings.ToLower(AgentRole) {
 		agent := InitializeNewAgent()
 		err := agent.Register()
 		if err != nil {
@@ -101,11 +114,11 @@ func main() {
 		agent.Run()
 	}
 
-	if strings.ToLower(viper.GetString("role")) == strings.ToLower(WorkerRole) {
+	if role == strings.ToLower(WorkerRole) {
 		InitializeNewWorker().Run()
 	}
 
-	if strings.ToLower(viper.GetString("role")) == strings.ToLower(APIRole) {
+	if role == strings.ToLower(APIRole) {
 		InitializeNewAPI().Run()
 	}
 }
