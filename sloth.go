@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/silverbackhq/sloth/internal/app/module/common"
+	"github.com/silverbackhq/sloth/internal/app/module"
 
 	"github.com/drone/envsubst"
 	"github.com/spf13/viper"

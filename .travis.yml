@@ -1,5 +1,9 @@
 language: go
 
+services:
+  - docker
+  - rabbitmq
+
 # needed for the nfpm pipe
 addons:
   apt:
@@ -18,6 +22,14 @@ env:
   - GO111MODULE=on
 
 install: true
+
+before_install:
+  - export NODE=127.0.0.1
+  - docker volume create --name etcd-data
+  - export DATA_DIR="etcd-data"
+  - export REGISTRY=quay.io/coreos/etcd
+  - docker run -d -p 2379:2379 -p 2380:2380 --volume=${DATA_DIR}:/etcd-data --name etcd ${REGISTRY}:latest /usr/local/bin/etcd --data-dir=/etcd-data --name node --initial-advertise-peer-urls http://${NODE}:2380 --listen-peer-urls http://0.0.0.0:2380 --advertise-client-urls http://${NODE}:2379 --listen-client-urls http://0.0.0.0:2379 --initial-cluster node1=http://${NODE}:2380
+  - curl -L ${NODE}:2379/v2/stats/leader
 
 # Fix this by renaming the directory before testing.
 # https://github.com/travis-ci/travis-ci/issues/4573

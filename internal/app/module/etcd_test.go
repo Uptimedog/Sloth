@@ -4,10 +4,12 @@
 
 package module
 
-// Etcd struct
-type Etcd struct{}
+import (
+	"github.com/nbio/st"
+	"testing"
+)
 
-// NewEtcd create a new instance
-func NewEtcd() *Etcd {
-	return &Etcd{}
+// TestEtcd
+func TestEtcd(t *testing.T) {
+	st.Expect(t, true, true)
 }
