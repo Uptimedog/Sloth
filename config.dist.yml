@@ -12,6 +12,15 @@ log:
     format: ${SLOTH_LOG_FORMAT:-json}
 
 
+# Drivers
+drivers:
+    rabbitmq:
+        connection: ~
+
+    etcd:
+        connection: ~
+
+
 # only if roles has agent
 agent:
     hostname: ${SLOTH_AGENT_HOSTNAME:-localhost}
