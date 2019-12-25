@@ -30,7 +30,8 @@ before_install:
   - export REGISTRY=quay.io/coreos/etcd
   - docker run -d -p 2379:2379 -p 2380:2380 --volume=${DATA_DIR}:/etcd-data --name etcd ${REGISTRY}:latest /usr/local/bin/etcd --data-dir=/etcd-data --name node --initial-advertise-peer-urls http://${NODE}:2380 --listen-peer-urls http://0.0.0.0:2380 --advertise-client-urls http://${NODE}:2379 --listen-client-urls http://0.0.0.0:2379 --initial-cluster node1=http://${NODE}:2380
   - docker ps
-  - curl -L 127.0.0.1:2379/v2/stats/leader
+  - sleep 10
+  - curl -L 127.0.0.1:2379/v2/stats/leader -v
 
 # Fix this by renaming the directory before testing.
 # https://github.com/travis-ci/travis-ci/issues/4573
