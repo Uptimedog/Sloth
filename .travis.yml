@@ -1,7 +1,6 @@
 language: go
 
 services:
-  - docker
   - rabbitmq
 
 # needed for the nfpm pipe
@@ -9,6 +8,7 @@ addons:
   apt:
     packages:
     - rpm
+    - rabbitmq-server
 
 go:
   - 1.9.x
@@ -20,18 +20,14 @@ go:
 
 env:
   - GO111MODULE=on
+  - ED_VERSION=3.3.18
 
 install: true
 
 before_install:
-  - export NODE=127.0.0.1
-  - docker volume create --name etcd-data
-  - export DATA_DIR="etcd-data"
-  - export REGISTRY=quay.io/coreos/etcd
-  - docker run -d -p 127.0.0.1:2379:2379 -p 127.0.0.1:2380:2380 --volume=${DATA_DIR}:/etcd-data --name etcd ${REGISTRY}:latest /usr/local/bin/etcd --data-dir=/etcd-data --name node --initial-advertise-peer-urls http://${NODE}:2380 --listen-peer-urls http://0.0.0.0:2380 --advertise-client-urls http://${NODE}:2379 --listen-client-urls http://0.0.0.0:2379 --initial-cluster node1=http://${NODE}:2380
-  - docker ps
-  - sleep 30
-  - netstat -tulpn
+  - curl -sL https://github.com/etcd-io/etcd/releases/download/v{$ED_VERSION}/etcd-v{$ED_VERSION}-linux-amd64.tar.gz | tar xz
+  - ./etcd-v$ED_VERSION-linux-amd64/etcd &
+  - sleep 10
   - curl -L http://127.0.0.1:2379/v2/stats/leader -v
 
 # Fix this by renaming the directory before testing.
