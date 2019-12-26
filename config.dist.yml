@@ -50,6 +50,13 @@ agent:
 worker:
     key: value
 
+
 # only if roles has api
 api:
-    key: value
+    # HTTP port
+    port: ${SLOTH_API_PORT:-8080}
+    # TLS configs
+    tls:
+        status: ${SLOTH_API_TLS_STATUS:-off}
+        pemPath: ${SLOTH_API_TLS_PEMPATH:-cert/server.pem}
+        keyPath: ${SLOTH_API_TLS_KEYPATH:-cert/server.key}

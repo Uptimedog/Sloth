@@ -39,15 +39,22 @@ func (e *Etcd) Connect(address []string, dialTimeout int) error {
 // Put store a key value pair
 func (e *Etcd) Put(ctx context.Context, key, value string) *clientv3.PutResponse {
 	kv := clientv3.NewKV(e.Connection)
-	pr, _ := kv.Put(ctx, key, value)
-	return pr
+	response, _ := kv.Put(ctx, key, value)
+	return response
 }
 
 // Get get the value of a key
 func (e *Etcd) Get(ctx context.Context, key string) *clientv3.GetResponse {
 	kv := clientv3.NewKV(e.Connection)
-	gr, _ := kv.Get(ctx, key)
-	return gr
+	response, _ := kv.Get(ctx, key)
+	return response
+}
+
+// Delete delete the value of a key
+func (e *Etcd) Delete(ctx context.Context, key string) *clientv3.DeleteResponse {
+	kv := clientv3.NewKV(e.Connection)
+	response, _ := kv.Delete(ctx, key)
+	return response
 }
 
 // Disconnect closes etcd connection
