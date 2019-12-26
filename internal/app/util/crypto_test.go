@@ -2,15 +2,15 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
-package module
+package util
 
 import (
 	"github.com/nbio/st"
 	"testing"
 )
 
-// TestCrypt test cases
-func TestCrypt(t *testing.T) {
+// TestCrypto test cases
+func TestCrypto(t *testing.T) {
 	encryptionKey, _ := GenerateRandomString(32)
 	text := []byte(`{"Id":1,"hostname":"localhost","message":"Hello World","type":"agent"}`)
 	ciphertext, err := Encrypt(text, []byte(encryptionKey))

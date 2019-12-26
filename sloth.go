@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/silverbackhq/sloth/internal/app/module"
+	"github.com/silverbackhq/sloth/internal/app/util"
 
 	"github.com/drone/envsubst"
 	"github.com/spf13/viper"
@@ -98,7 +99,7 @@ func main() {
 		role = strings.ToLower(viper.GetString("role"))
 	}
 
-	if !module.InArray(role, []string{AgentRole, WorkerRole, APIRole}) {
+	if !util.InArray(role, []string{AgentRole, WorkerRole, APIRole}) {
 		panic(fmt.Sprintf(
 			"Error! Invalid role [%s]",
 			role,
