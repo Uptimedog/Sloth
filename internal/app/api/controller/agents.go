@@ -32,6 +32,7 @@ func GetAgents(c *gin.Context) {
 func GetAgent(c *gin.Context) {
 	//rawBody, _ := c.GetRawData()
 	//body := string(rawBody)
+	//ID := c.Param("id")
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
 	})
@@ -41,6 +42,7 @@ func GetAgent(c *gin.Context) {
 func UpdateAgent(c *gin.Context) {
 	//rawBody, _ := c.GetRawData()
 	//body := string(rawBody)
+	//ID := c.Param("id")
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
 	})
@@ -50,6 +52,7 @@ func UpdateAgent(c *gin.Context) {
 func DeleteAgent(c *gin.Context) {
 	//rawBody, _ := c.GetRawData()
 	//body := string(rawBody)
+	//ID := c.Param("id")
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
 	})
