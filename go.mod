@@ -3,7 +3,7 @@ module github.com/silverbackhq/sloth
 go 1.13
 
 require (
-	github.com/coreos/etcd v3.3.18+incompatible
+	github.com/coreos/etcd v3.4.3+incompatible
 	github.com/drone/envsubst v1.0.2
 	github.com/gin-gonic/gin v1.5.0
 	github.com/google/uuid v1.1.1 // indirect
