@@ -2,12 +2,12 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
-package module
+package api
 
-// Etcd struct
-type Etcd struct{}
+// Config struct
+type Config struct{}
 
-// NewEtcd create a new instance
-func NewEtcd() *Etcd {
-	return &Etcd{}
+// NewConfig create a new instance
+func NewConfig() *Config {
+	return &Config{}
 }

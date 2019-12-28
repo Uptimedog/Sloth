@@ -2,12 +2,14 @@
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
-package orchestrator
+package module
 
-// Config struct
-type Config struct{}
+import (
+	"github.com/nbio/st"
+	"testing"
+)
 
-// NewConfig create a new instance
-func NewConfig() *Config {
-	return &Config{}
+// TestEtcd
+func TestEtcd(t *testing.T) {
+	st.Expect(t, true, true)
 }

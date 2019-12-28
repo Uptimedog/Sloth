@@ -13,7 +13,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/silverbackhq/sloth/internal/app/module/common"
+	"github.com/silverbackhq/sloth/internal/app/module"
+	"github.com/silverbackhq/sloth/internal/app/util"
 
 	"github.com/drone/envsubst"
 	"github.com/spf13/viper"
@@ -24,14 +25,16 @@ const (
 	AgentRole = "agent"
 	// WorkerRole var
 	WorkerRole = "worker"
-	// OrchestratorRole var
-	OrchestratorRole = "orchestrator"
+	// APIRole var
+	APIRole = "api"
 )
 
 func main() {
 	var configFile string
+	var role string
 
 	flag.StringVar(&configFile, "config", "config.prod.yml", "config")
+	flag.StringVar(&role, "role", "", "role")
 	flag.Parse()
 
 	configUnparsed, err := ioutil.ReadFile(configFile)
@@ -92,24 +95,31 @@ func main() {
 		}
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(AgentRole),
-	) {
-		InitializeNewAgent().Run()
+	if role == "" {
+		role = strings.ToLower(viper.GetString("role"))
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(WorkerRole),
-	) {
+	if !util.InArray(role, []string{AgentRole, WorkerRole, APIRole}) {
+		panic(fmt.Sprintf(
+			"Error! Invalid role [%s]",
+			role,
+		))
+	}
+
+	if role == strings.ToLower(AgentRole) {
+		agent := InitializeNewAgent()
+		err := agent.Register()
+		if err != nil {
+			panic(fmt.Sprintf("Error! Unable to register agent: %s", err.Error()))
+		}
+		agent.Run()
+	}
+
+	if role == strings.ToLower(WorkerRole) {
 		InitializeNewWorker().Run()
 	}
 
-	if strings.Contains(
-		strings.ToLower(viper.GetString("roles")),
-		strings.ToLower(OrchestratorRole),
-	) {
-		InitializeNewOrchestrator().Run()
+	if role == strings.ToLower(APIRole) {
+		InitializeNewAPI().Run()
 	}
 }

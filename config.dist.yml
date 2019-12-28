@@ -1,5 +1,5 @@
-# Node roles
-roles: ${SLOTH_ROLES:-agent,orchestrator,worker}
+# Node role agent or worker or api
+role: ${SLOTH_ROLES:-agent}
 
 
 # Log configs
@@ -12,16 +12,51 @@ log:
     format: ${SLOTH_LOG_FORMAT:-json}
 
 
+# Drivers
+drivers:
+    rabbitmq:
+        connection: ~
+
+    etcd:
+        connection: ~
+
+
 # only if roles has agent
 agent:
-    key: value
-
-
-# only if roles has orchestrator
-orchestrator:
-    key: value
+    hostname: ${SLOTH_AGENT_HOSTNAME:-localhost}
+    client_key: ${SLOTH_AGENT_CLIENT_KEY:-feF-KciSUzsx3kXipfvrw0qN0ty9fTTS}
+    checks:
+        -
+            type: http
+            configs:
+                -
+                    name: url
+                    value: http://localhost
+                -
+                    name: method
+                    value: get
+                -
+                    name: timeout
+                    value: 5s
+                -
+                    name: method
+                    value: get
+                -
+                    name: headers
+                    value: x-key=value_here
 
 
 # only if roles has worker
 worker:
     key: value
+
+
+# only if roles has api
+api:
+    # HTTP port
+    port: ${SLOTH_API_PORT:-8080}
+    # TLS configs
+    tls:
+        status: ${SLOTH_API_TLS_STATUS:-off}
+        pemPath: ${SLOTH_API_TLS_PEMPATH:-cert/server.pem}
+        keyPath: ${SLOTH_API_TLS_KEYPATH:-cert/server.key}

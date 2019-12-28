@@ -1,10 +1,14 @@
 language: go
 
+services:
+  - rabbitmq
+
 # needed for the nfpm pipe
 addons:
   apt:
     packages:
     - rpm
+    - rabbitmq-server
 
 go:
   - 1.9.x
@@ -18,6 +22,12 @@ env:
   - GO111MODULE=on
 
 install: true
+
+before_install:
+  - curl -sL https://github.com/etcd-io/etcd/releases/download/v3.3.18/etcd-v3.3.18-linux-amd64.tar.gz | tar xz
+  - ./etcd-v3.3.18-linux-amd64/etcd &
+  - sleep 10
+  - curl -L http://127.0.0.1:2379/v2/stats/leader -v
 
 # Fix this by renaming the directory before testing.
 # https://github.com/travis-ci/travis-ci/issues/4573
