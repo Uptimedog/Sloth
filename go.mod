@@ -13,6 +13,6 @@ require (
 	github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/viper v1.6.2
-	github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271
+	github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
