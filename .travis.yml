@@ -16,6 +16,7 @@ go:
   - 1.11.x
   - 1.12.x
   - 1.13.x
+  - 1.14.x
   - master
 
 env:
@@ -36,8 +37,9 @@ script:
   - export PATH="$PATH:$GOBIN"
   # Fix dir names
   - cd $GOPATH/src/github.com/
-  - mv silverbackhq/Sloth silverbackhq/sloth
-  - cd silverbackhq/sloth
+  - mv Clivern/Sloth Clivern/sloth
+  - mv Clivern clivern
+  - cd clivern/sloth
   # Config & execute ci tasks
   - make install_revive
   - make ci

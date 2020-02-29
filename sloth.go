@@ -1,4 +1,4 @@
-// Copyright 2019 Silverbackhq. All rights reserved.
+// Copyright 2019 Clivern. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
@@ -13,8 +13,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/silverbackhq/sloth/internal/app/module"
-	"github.com/silverbackhq/sloth/internal/app/util"
+	"github.com/clivern/sloth/internal/app/module"
+	"github.com/clivern/sloth/internal/app/util"
 
 	"github.com/drone/envsubst"
 	"github.com/spf13/viper"

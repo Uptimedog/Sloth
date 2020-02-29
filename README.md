@@ -1,18 +1,18 @@
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/silverbackhq/sloth/master/assets/img/gopher.png?v=0.0.1" width="150" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/clivern/sloth/master/assets/img/gopher.png?v=0.0.1" width="150" />
     <h3 align="center">Sloth</h3>
     <p align="center">Liteweight HA Monitoring & Alerting System.</p>
     <p align="center">
-        <a href="https://godoc.org/github.com/silverbackhq/sloth"><img src="https://godoc.org/github.com/silverbackhq/sloth?status.svg"></a>
-        <a href="https://travis-ci.org/silverbackhq/Sloth"><img src="https://travis-ci.org/silverbackhq/Sloth.svg?branch=master"></a>
-        <a href="https://github.com/silverbackhq/Sloth/releases"><img src="https://img.shields.io/badge/Version-0.0.1-red.svg"></a>
-        <a href="https://goreportcard.com/report/github.com/silverbackhq/Sloth"><img src="https://goreportcard.com/badge/github.com/silverbackhq/Sloth?v=0.0.1"></a>
-        <a href="https://github.com/silverbackhq/Sloth/blob/master/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-orange.svg"></a>
+        <a href="https://godoc.org/github.com/clivern/sloth"><img src="https://godoc.org/github.com/clivern/sloth?status.svg"></a>
+        <a href="https://travis-ci.org/clivern/Sloth"><img src="https://travis-ci.org/clivern/Sloth.svg?branch=master"></a>
+        <a href="https://github.com/clivern/Sloth/releases"><img src="https://img.shields.io/badge/Version-0.0.1-red.svg"></a>
+        <a href="https://goreportcard.com/report/github.com/clivern/Sloth"><img src="https://goreportcard.com/badge/github.com/clivern/Sloth?v=0.0.1"></a>
+        <a href="https://github.com/clivern/Sloth/blob/master/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-orange.svg"></a>
     </p>
 </p>
 
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/silverbackhq/Sloth/master/assets/img/diagram.png?v=0.1.0" width="65%" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/clivern/Sloth/master/assets/img/diagram.png?v=0.1.0" width="65%" />
 </p>
 
 
@@ -37,12 +37,12 @@
 
 For transparency into our release cycle and in striving to maintain backward compatibility, Sloth is maintained under the [Semantic Versioning guidelines](https://semver.org/) and release process is predictable and business-friendly.
 
-See the [Releases section of our GitHub project](https://github.com/silverbackhq/sloth/releases) for changelogs for each release version of Sloth. It contains summaries of the most noteworthy changes made in each release.
+See the [Releases section of our GitHub project](https://github.com/clivern/sloth/releases) for changelogs for each release version of Sloth. It contains summaries of the most noteworthy changes made in each release.
 
 
 ## Bug tracker
 
-If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/silverbackhq/sloth/issues
+If you have any suggestions, bug reports, or annoyances please report them to our issue tracker at https://github.com/clivern/sloth/issues
 
 
 ## Security Issues
@@ -57,6 +57,6 @@ We are an open source, community-driven project so please feel free to join us. 
 
 ## License
 
-© 2019, silverbackhq. Released under [MIT License](https://opensource.org/licenses/mit-license.php).
+© 2019, clivern. Released under [MIT License](https://opensource.org/licenses/mit-license.php).
 
-**Sloth** is authored and maintained by [@silverbackhq](http://github.com/silverbackhq).
+**Sloth** is authored and maintained by [@clivern](http://github.com/clivern).

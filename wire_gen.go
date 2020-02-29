@@ -6,10 +6,10 @@
 package main
 
 import (
-	"github.com/silverbackhq/sloth/internal/app/agent"
-	"github.com/silverbackhq/sloth/internal/app/api"
-	"github.com/silverbackhq/sloth/internal/app/cmd"
-	"github.com/silverbackhq/sloth/internal/app/worker"
+	"github.com/clivern/sloth/internal/app/agent"
+	"github.com/clivern/sloth/internal/app/api"
+	"github.com/clivern/sloth/internal/app/cmd"
+	"github.com/clivern/sloth/internal/app/worker"
 )
 
 func InitializeNewAgent() *cmd.Agent {

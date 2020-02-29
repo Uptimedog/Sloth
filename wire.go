@@ -1,4 +1,4 @@
-// Copyright 2019 Silverbackhq. All rights reserved.
+// Copyright 2019 Clivern. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
@@ -7,11 +7,11 @@
 package main
 
 import (
+	"github.com/clivern/sloth/internal/app/agent"
+	"github.com/clivern/sloth/internal/app/api"
+	"github.com/clivern/sloth/internal/app/cmd"
+	"github.com/clivern/sloth/internal/app/worker"
 	"github.com/google/wire"
-	"github.com/silverbackhq/sloth/internal/app/agent"
-	"github.com/silverbackhq/sloth/internal/app/api"
-	"github.com/silverbackhq/sloth/internal/app/cmd"
-	"github.com/silverbackhq/sloth/internal/app/worker"
 )
 
 func InitializeNewAgent() *cmd.Agent {
