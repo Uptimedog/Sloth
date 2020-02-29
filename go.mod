@@ -9,7 +9,7 @@ require (
 	github.com/google/wire v0.4.0
 	github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32
 	github.com/satori/go.uuid v1.2.0
-	github.com/silverbackhq/sloth v0.0.0-20200229190001-e43c64b866b3
+	github.com/silverbackhq/sloth e5a1b5b8679b
 	github.com/spf13/viper v1.6.2
 	github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
 )
