@@ -3,7 +3,6 @@
     <h3 align="center">Sloth</h3>
     <p align="center">Liteweight HA Monitoring & Alerting System.</p>
     <p align="center">
-        <a href="https://godoc.org/github.com/clivern/sloth"><img src="https://godoc.org/github.com/clivern/sloth?status.svg"></a>
         <a href="https://travis-ci.org/clivern/Sloth"><img src="https://travis-ci.org/clivern/Sloth.svg?branch=master"></a>
         <a href="https://github.com/clivern/Sloth/releases"><img src="https://img.shields.io/badge/Version-0.0.1-red.svg"></a>
         <a href="https://goreportcard.com/report/github.com/clivern/Sloth"><img src="https://goreportcard.com/badge/github.com/clivern/Sloth?v=0.0.1"></a>
