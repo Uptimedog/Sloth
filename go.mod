@@ -3,7 +3,7 @@ module github.com/clivern/sloth
 go 1.14
 
 require (
-	github.com/coreos/etcd v3.3.18+incompatible
+	github.com/coreos/etcd v3.4.7+incompatible
 	github.com/drone/envsubst v1.0.2
 	github.com/gin-gonic/gin v1.6.2
 	github.com/google/uuid v1.1.1 // indirect
