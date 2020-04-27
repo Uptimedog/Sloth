@@ -83,6 +83,9 @@ var workerCmd = &cobra.Command{
 
 		if viper.GetString("log.output") == "stdout" {
 			log.SetOutput(os.Stdout)
+		} else {
+			f, _ := os.Create(viper.GetString("log.output"))
+			log.SetOutput(f)
 		}
 
 		if viper.GetString("log.level") == "info" {
