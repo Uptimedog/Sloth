@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/clivern/sloth/master/assets/img/gopher.png?v=0.0.1" width="150" />
+    <img alt="Sloth Logo" src="https://raw.githubusercontent.com/clivern/sloth/master/assets/img/gopher.png?v=0.0.1" width="180" />
     <h3 align="center">Sloth</h3>
     <p align="center">Liteweight HA Monitoring & Alerting System.</p>
     <p align="center">
