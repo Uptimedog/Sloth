@@ -5,15 +5,16 @@
 package util
 
 import (
-	"github.com/nbio/st"
 	"testing"
+
+	"github.com/clivern/sloth/pkg"
 )
 
 // TestInArray test cases
 func TestInArray(t *testing.T) {
-	st.Expect(t, true, InArray("A", []string{"A", "B", "C", "D"}))
-	st.Expect(t, true, InArray("B", []string{"A", "B", "C", "D"}))
-	st.Expect(t, false, InArray("H", []string{"A", "B", "C", "D"}))
-	st.Expect(t, true, InArray(1, []int{2, 3, 1}))
-	st.Expect(t, false, InArray(9, []int{2, 3, 1}))
+	pkg.Expect(t, true, InArray("A", []string{"A", "B", "C", "D"}))
+	pkg.Expect(t, true, InArray("B", []string{"A", "B", "C", "D"}))
+	pkg.Expect(t, false, InArray("H", []string{"A", "B", "C", "D"}))
+	pkg.Expect(t, true, InArray(1, []int{2, 3, 1}))
+	pkg.Expect(t, false, InArray(9, []int{2, 3, 1}))
 }

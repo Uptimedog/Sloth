@@ -5,11 +5,12 @@
 package module
 
 import (
-	"github.com/nbio/st"
 	"testing"
+
+	"github.com/clivern/sloth/pkg"
 )
 
 // TestEtcd
 func TestEtcd(t *testing.T) {
-	st.Expect(t, true, true)
+	pkg.Expect(t, true, true)
 }

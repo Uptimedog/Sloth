@@ -1,59 +1,153 @@
-// Copyright 2019 Clivern. All rights reserved.
+// Copyright 2020 Clivern. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
 package cmd
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strconv"
 
-	"github.com/clivern/sloth/internal/app/api"
 	"github.com/clivern/sloth/internal/app/api/controller"
+	"github.com/clivern/sloth/internal/app/middleware"
+	"github.com/clivern/sloth/internal/app/module"
 
+	"github.com/drone/envsubst"
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-// API struct
-type API struct {
-	Config *api.Config
+var serveCmd = &cobra.Command{
+	Use:   "api",
+	Short: "Start Sloth API Server",
+	Run: func(cmd *cobra.Command, args []string) {
+		configUnparsed, err := ioutil.ReadFile(config)
+
+		if err != nil {
+			panic(fmt.Sprintf(
+				"Error while reading config file [%s]: %s",
+				config,
+				err.Error(),
+			))
+		}
+
+		configParsed, err := envsubst.EvalEnv(string(configUnparsed))
+
+		if err != nil {
+			panic(fmt.Sprintf(
+				"Error while parsing config file [%s]: %s",
+				config,
+				err.Error(),
+			))
+		}
+
+		viper.SetConfigType("yaml")
+		err = viper.ReadConfig(bytes.NewBuffer([]byte(configParsed)))
+
+		if err != nil {
+			panic(fmt.Sprintf(
+				"Error while loading configs [%s]: %s",
+				config,
+				err.Error(),
+			))
+		}
+
+		if viper.GetString("log.output") != "stdout" {
+			fs := module.FileSystem{}
+			dir, _ := filepath.Split(viper.GetString("log.output"))
+
+			if !fs.DirExists(dir) {
+				if _, err := fs.EnsureDir(dir, 777); err != nil {
+					panic(fmt.Sprintf(
+						"Directory [%s] creation failed with error: %s",
+						dir,
+						err.Error(),
+					))
+				}
+			}
+
+			if !fs.FileExists(viper.GetString("log.output")) {
+				f, err := os.Create(viper.GetString("log.output"))
+				if err != nil {
+					panic(fmt.Sprintf(
+						"Error while creating log file [%s]: %s",
+						viper.GetString("log.output"),
+						err.Error(),
+					))
+				}
+				defer f.Close()
+			}
+		}
+
+		if viper.GetString("log.output") == "stdout" {
+			gin.DefaultWriter = os.Stdout
+			log.SetOutput(os.Stdout)
+		} else {
+			f, _ := os.Create(viper.GetString("log.output"))
+			gin.DefaultWriter = io.MultiWriter(f)
+		}
+
+		if viper.GetString("log.level") == "info" {
+			log.SetLevel(log.InfoLevel)
+		}
+
+		if viper.GetString("mode") == "prod" {
+			gin.SetMode(gin.ReleaseMode)
+			gin.DefaultWriter = ioutil.Discard
+			gin.DisableConsoleColor()
+		}
+
+		log.SetFormatter(&log.JSONFormatter{})
+
+		r := gin.Default()
+
+		r.Use(middleware.Correlation())
+		r.Use(middleware.Logger())
+		r.Use(middleware.Metric())
+
+		r.GET("/favicon.ico", func(c *gin.Context) {
+			c.String(http.StatusNoContent, "")
+		})
+
+		r.GET(viper.GetString("api.metrics.prometheus.endpoint"), gin.WrapH(controller.Metrics()))
+		r.GET("/api/_health", controller.HealthCheck)
+		r.POST("/api/agents", controller.CreateAgent)
+		r.GET("/api/agents", controller.GetAgents)
+		r.GET("/api/agents/:id", controller.GetAgent)
+		r.PUT("/api/agents/:id", controller.UpdateAgent)
+		r.DELETE("/api/agents/:id", controller.DeleteAgent)
+
+		var runerr error
+
+		if viper.GetBool("api.tls.status") {
+			runerr = r.RunTLS(
+				fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
+				viper.GetString("api.tls.pemPath"),
+				viper.GetString("api.tls.keyPath"),
+			)
+		} else {
+			runerr = r.Run(
+				fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
+			)
+		}
+
+		if runerr != nil {
+			panic(runerr.Error())
+		}
+
+	},
 }
 
-// NewAPI create a new instance
-func NewAPI(config *api.Config) *API {
-	return &API{
-		Config: config,
-	}
-}
-
-// Run runs the api
-func (w *API) Run() {
-	fmt.Println("API server started .....")
-
-	r := gin.Default()
-
-	r.GET("/favicon.ico", func(c *gin.Context) {
-		c.String(http.StatusNoContent, "")
-	})
-
-	r.GET("/api/_health", controller.HealthCheck)
-	r.POST("/api/agents", controller.CreateAgent)
-	r.GET("/api/agents", controller.GetAgents)
-	r.GET("/api/agents/:id", controller.GetAgent)
-	r.PUT("/api/agents/:id", controller.UpdateAgent)
-	r.DELETE("/api/agents/:id", controller.DeleteAgent)
-
-	if viper.GetBool("api.tls.status") {
-		r.RunTLS(
-			fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
-			viper.GetString("api.tls.pemPath"),
-			viper.GetString("api.tls.keyPath"),
-		)
-	} else {
-		r.Run(
-			fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
-		)
-	}
+func init() {
+	serveCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
+	serveCmd.MarkFlagRequired("config")
+	rootCmd.AddCommand(serveCmd)
 }

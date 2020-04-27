@@ -1,10 +1,11 @@
-// Copyright 2019 Clivern. All rights reserved.
+// Copyright 2020 Clivern. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
 package util
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -21,7 +22,7 @@ func InArray(val interface{}, array interface{}) bool {
 		s := reflect.ValueOf(array)
 
 		for i := 0; i < s.Len(); i++ {
-			if reflect.DeepEqual(val, s.Index(i).Interface()) == true {
+			if reflect.DeepEqual(val, s.Index(i).Interface()) {
 				return true
 			}
 		}
@@ -85,4 +86,13 @@ func Unset(a []string, i int) []string {
 	a[i] = a[len(a)-1]
 	a[len(a)-1] = ""
 	return a[:len(a)-1]
+}
+
+// ConvertToJSON convert object to json
+func ConvertToJSON(val interface{}) (string, error) {
+	data, err := json.Marshal(val)
+	if err != nil {
+		return "", err
+	}
+	return string(data), nil
 }

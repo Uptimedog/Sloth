@@ -5,11 +5,12 @@
 package main
 
 import (
-	"github.com/nbio/st"
 	"testing"
+
+	"github.com/clivern/sloth/pkg"
 )
 
 // TestPkgName test cases
 func TestPkgName(t *testing.T) {
-	st.Expect(t, "Sloth", "Sloth")
+	pkg.Expect(t, "Sloth", "Sloth")
 }

@@ -1,27 +1,4 @@
-# Node role agent or worker or api
-role: ${SLOTH_ROLES:-agent}
-
-
-# Log configs
-log:
-    # Log level, it can be debug, info, warn, error, panic, fatal
-    level: ${SLOTH_LOG_LEVEL:-warn}
-    # output can be stdout or abs path to log file /var/logs/sloth.log
-    output: ${SLOTH_LOG_OUTPUT:-stdout}
-    # Format can be json
-    format: ${SLOTH_LOG_FORMAT:-json}
-
-
-# Drivers
-drivers:
-    rabbitmq:
-        connection: ~
-
-    etcd:
-        connection: ~
-
-
-# only if roles has agent
+# Agent Configs
 agent:
     hostname: ${SLOTH_AGENT_HOSTNAME:-localhost}
     client_key: ${SLOTH_AGENT_CLIENT_KEY:-feF-KciSUzsx3kXipfvrw0qN0ty9fTTS}
@@ -45,13 +22,12 @@ agent:
                     name: headers
                     value: x-key=value_here
 
-
-# only if roles has worker
+# Worker Configs
 worker:
     key: value
 
 
-# only if roles has api
+# API Server Configs
 api:
     # HTTP port
     port: ${SLOTH_API_PORT:-8080}
@@ -60,3 +36,31 @@ api:
         status: ${SLOTH_API_TLS_STATUS:-off}
         pemPath: ${SLOTH_API_TLS_PEMPATH:-cert/server.pem}
         keyPath: ${SLOTH_API_TLS_KEYPATH:-cert/server.key}
+
+    # Runtime, Requests/Response and Sloth Metrics
+    metrics:
+        prometheus:
+            # Route for the metrics endpoint
+            endpoint: ${SLOTH_API_METRICS_PROM_ENDPOINT:-/metrics}
+
+
+# Env mode (dev or prod)
+mode: ${SLOTH_MODE:-dev}
+
+# Log configs
+log:
+    # Log level, it can be debug, info, warn, error, panic, fatal
+    level: ${SLOTH_LOG_LEVEL:-warn}
+    # output can be stdout or abs path to log file /var/logs/sloth.log
+    output: ${SLOTH_LOG_OUTPUT:-stdout}
+    # Format can be json
+    format: ${SLOTH_LOG_FORMAT:-json}
+
+
+# Drivers
+drivers:
+    rabbitmq:
+        connection: ~
+
+    etcd:
+        connection: ~

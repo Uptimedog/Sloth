@@ -1,4 +1,4 @@
-// Copyright 2019 Clivern. All rights reserved.
+// Copyright 2020 Clivern. All rights reserved.
 // Use of this source code is governed by the MIT
 // license that can be found in the LICENSE file.
 
@@ -7,39 +7,19 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clivern/sloth/internal/app/agent"
-
-	"github.com/spf13/viper"
+	"github.com/spf13/cobra"
 )
 
-// Agent struct
-type Agent struct {
-	Config *agent.Config
+var agentCmd = &cobra.Command{
+	Use:   "agent",
+	Short: "Start Sloth Agent",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Agent Started ...")
+	},
 }
 
-// NewAgent create a new instance
-func NewAgent(config *agent.Config) *Agent {
-	return &Agent{
-		Config: config,
-	}
-}
-
-// Run runs the agent
-func (a *Agent) Run() {
-	fmt.Println("Agent started .....")
-}
-
-// Register registers the agent
-func (a *Agent) Register() error {
-
-	err := viper.Unmarshal(a.Config)
-
-	if err != nil {
-		return fmt.Errorf(
-			"configs are invalid [%s]",
-			err.Error(),
-		)
-	}
-
-	return nil
+func init() {
+	agentCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
+	agentCmd.MarkFlagRequired("config")
+	rootCmd.AddCommand(agentCmd)
 }
