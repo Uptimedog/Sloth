@@ -38,7 +38,7 @@ func (lr *LatestRelease) ConvertToJSON() (string, error) {
 	return string(data), nil
 }
 
-// GetLatestRelease gets the latest beetle release
+// GetLatestRelease gets the latest sloth release
 func GetLatestRelease() (LatestRelease, error) {
 	result := LatestRelease{}
 

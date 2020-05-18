@@ -16,14 +16,14 @@ import (
 var (
 	httpRequests = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
-			Namespace: "beetle",
+			Namespace: "sloth",
 			Name:      "total_http_requests",
 			Help:      "How many HTTP requests processed, partitioned by status code and HTTP method.",
 		}, []string{"code", "method", "handler", "host", "url"})
 
 	requestDuration = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
-			Subsystem: "beetle",
+			Subsystem: "sloth",
 			Name:      "request_duration_seconds",
 			Help:      "The HTTP request latencies in seconds.",
 		},
@@ -32,7 +32,7 @@ var (
 
 	responseSize = prometheus.NewSummary(
 		prometheus.SummaryOpts{
-			Namespace: "beetle",
+			Namespace: "sloth",
 			Name:      "response_size_bytes",
 			Help:      "The HTTP response sizes in bytes.",
 		},
