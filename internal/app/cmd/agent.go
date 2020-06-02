@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/clivern/sloth/internal/app/module"
 
@@ -88,11 +89,20 @@ var agentCmd = &cobra.Command{
 			log.SetOutput(f)
 		}
 
-		if viper.GetString("log.level") == "info" {
-			log.SetLevel(log.InfoLevel)
+		lvl := strings.ToLower(viper.GetString("log.level"))
+		level, err := log.ParseLevel(lvl)
+
+		if err != nil {
+			level = log.InfoLevel
 		}
 
-		log.SetFormatter(&log.JSONFormatter{})
+		log.SetLevel(level)
+
+		if viper.GetString("log.format") == "json" {
+			log.SetFormatter(&log.JSONFormatter{})
+		} else {
+			log.SetFormatter(&log.TextFormatter{})
+		}
 
 		fmt.Println("Agent Started ...")
 	},
