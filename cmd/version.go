@@ -7,7 +7,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clivern/sloth/internal/app/module"
+	"github.com/clivern/sloth/core/module"
 	"github.com/spf13/cobra"
 )
 

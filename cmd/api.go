@@ -7,22 +7,28 @@ package cmd
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
-	"github.com/clivern/sloth/internal/app/module"
+	"github.com/clivern/sloth/core/api/controller"
+	"github.com/clivern/sloth/core/middleware"
+	"github.com/clivern/sloth/core/module"
 
 	"github.com/drone/envsubst"
+	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-var workerCmd = &cobra.Command{
-	Use:   "worker",
-	Short: "Start Sloth Worker",
+var serveCmd = &cobra.Command{
+	Use:   "api",
+	Short: "Start Sloth API Server",
 	Run: func(cmd *cobra.Command, args []string) {
 		configUnparsed, err := ioutil.ReadFile(config)
 
@@ -83,9 +89,11 @@ var workerCmd = &cobra.Command{
 		}
 
 		if viper.GetString("log.output") == "stdout" {
+			gin.DefaultWriter = os.Stdout
 			log.SetOutput(os.Stdout)
 		} else {
 			f, _ := os.Create(viper.GetString("log.output"))
+			gin.DefaultWriter = io.MultiWriter(f)
 			log.SetOutput(f)
 		}
 
@@ -98,18 +106,59 @@ var workerCmd = &cobra.Command{
 
 		log.SetLevel(level)
 
+		if viper.GetString("mode") == "prod" {
+			gin.SetMode(gin.ReleaseMode)
+			gin.DefaultWriter = ioutil.Discard
+			gin.DisableConsoleColor()
+		}
+
 		if viper.GetString("log.format") == "json" {
 			log.SetFormatter(&log.JSONFormatter{})
 		} else {
 			log.SetFormatter(&log.TextFormatter{})
 		}
 
-		fmt.Println("Worker Started ...")
+		r := gin.Default()
+
+		r.Use(middleware.Correlation())
+		r.Use(middleware.Logger())
+		r.Use(middleware.Metric())
+
+		r.GET("/favicon.ico", func(c *gin.Context) {
+			c.String(http.StatusNoContent, "")
+		})
+
+		r.GET(viper.GetString("api.metrics.prometheus.endpoint"), gin.WrapH(controller.Metrics()))
+		r.GET("/api/_health", controller.HealthCheck)
+		r.POST("/api/agents", controller.CreateAgent)
+		r.GET("/api/agents", controller.GetAgents)
+		r.GET("/api/agents/:id", controller.GetAgent)
+		r.PUT("/api/agents/:id", controller.UpdateAgent)
+		r.DELETE("/api/agents/:id", controller.DeleteAgent)
+
+		var runerr error
+
+		if viper.GetBool("api.tls.status") {
+			runerr = r.RunTLS(
+				fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
+				viper.GetString("api.tls.pemPath"),
+				viper.GetString("api.tls.keyPath"),
+			)
+		} else {
+			runerr = r.Run(
+				fmt.Sprintf(":%s", strconv.Itoa(viper.GetInt("api.port"))),
+			)
+		}
+
+		if runerr != nil {
+			panic(runerr.Error())
+		}
+
 	},
 }
 
 func init() {
-	workerCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
-	workerCmd.MarkFlagRequired("config")
-	rootCmd.AddCommand(workerCmd)
+	serveCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
+	serveCmd.MarkFlagRequired("config")
+	rootCmd.AddCommand(serveCmd)
 }

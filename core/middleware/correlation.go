@@ -7,7 +7,7 @@ package middleware
 import (
 	"strings"
 
-	"github.com/clivern/sloth/internal/app/util"
+	"github.com/clivern/sloth/core/util"
 
 	"github.com/gin-gonic/gin"
 )

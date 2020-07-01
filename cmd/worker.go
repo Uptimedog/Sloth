@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/clivern/sloth/internal/app/module"
+	"github.com/clivern/sloth/core/module"
 
 	"github.com/drone/envsubst"
 	log "github.com/sirupsen/logrus"
@@ -20,9 +20,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-var agentCmd = &cobra.Command{
-	Use:   "agent",
-	Short: "Start Sloth Agent",
+var workerCmd = &cobra.Command{
+	Use:   "worker",
+	Short: "Start Sloth Worker",
 	Run: func(cmd *cobra.Command, args []string) {
 		configUnparsed, err := ioutil.ReadFile(config)
 
@@ -104,12 +104,12 @@ var agentCmd = &cobra.Command{
 			log.SetFormatter(&log.TextFormatter{})
 		}
 
-		fmt.Println("Agent Started ...")
+		fmt.Println("Worker Started ...")
 	},
 }
 
 func init() {
-	agentCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
-	agentCmd.MarkFlagRequired("config")
-	rootCmd.AddCommand(agentCmd)
+	workerCmd.Flags().StringVarP(&config, "config", "c", "config.prod.yml", "Absolute path to config file (required)")
+	workerCmd.MarkFlagRequired("config")
+	rootCmd.AddCommand(workerCmd)
 }
